@@ -65,4 +65,4 @@ TeamShare directory.
 
 ### Screenshots
 1. **Windows Users and Group**
-![windows users and group](<../screenshots/windows users group.png>)
+![windows user and group](../screenshots/windows-users-group.png)
