@@ -276,3 +276,76 @@ troubleshooting background services on Windows systems.
 ![windows service running](../screenshots/windows-service-running.png)
 4. Windows service investigation
 ![windows service investigation](../screenshots/windows-service-investigation.png)
+
+## 5. Windows Event Viewer and Log Analysis
+
+### Objective
+Review Windows system and application logs to understand
+how operating system events can support troubleshooting
+and system monitoring.
+
+### Environment
+- Virtual machine: VirtualBox (WIN-LAB01)
+- Operating system: Windows 11
+- Tools: Event Viewer and Windows PowerShell
+- Logs reviewed: System and Application
+
+### Procedure
+1. Opened Event Viewer using eventvwr.msc (Windows button + R)
+2. Reviewed the Windows System log.
+3. Inspected Service Control Manager events where available.
+4. Reviewed the Application log.
+5. Retrieved recent events using Get-WinEvent.
+6. Examined event timestamps, sources, IDs, severity levels,
+   and messages.
+7. Recorded the findings and their possible significance.
+
+### Commands Used
+
+```powershell
+Get-WinEvent -FilterHashtable @{
+    LogName = 'System'
+    ProviderName = 'Service Control Manager'
+} -MaxEvents 10 |
+    Select-Object TimeCreated, Id, LevelDisplayName, Message |
+    Format-List
+
+Get-WinEvent -LogName Application -MaxEvents 10 |
+    Select-Object TimeCreated, ProviderName, Id, LevelDisplayName, Message |
+    Format-List
+```
+
+### Result
+Windows System and Application logs were reviewed using
+Event Viewer and PowerShell. Event details were examined
+to understand their source, timestamp, severity, and message.
+
+### Findings
+- System log event: Event 7040, Service Log Manager
+- Event source/provider: Service Log Manager
+- Event ID: 7040
+
+### Analysis
+Windows event logs provide information about operating
+system activity, application behaviour, and service events.
+Reviewing event details helps administrators investigate
+errors, correlate system activity, and identify issues
+that may require further troubleshooting.
+
+### Conclusion
+This exercise demonstrated how to use Windows Event Viewer
+and PowerShell to inspect and interpret operating system
+logs. I practised reviewing event sources, timestamps,
+IDs, severity levels, and messages. These skills support
+Windows troubleshooting and provide a foundation for
+security event investigation.
+
+### Screenshots
+1. Windows system log
+![windows system log](../screenshots/windows-system-logs.png)
+2. Windows service event
+![windows service event](../screenshots/windows-service-event.png)
+3. Windows application log
+![windows application log](../screenshots/windows-application-log.png)
+4. Windows event powershell
+![windows event powershell](<../screenshots/windows-event powershell.png>)
