@@ -124,8 +124,83 @@ worked for the intended user. The exercise also showed
 how group based permissions support consistent and
 manageable access control.
 
-### ScreenshotsS
+### Screenshots
 1. Windows permission & icacls command
 ![Windows Permission icacls Command](../screenshots/windows-icacls-command.png)
 2. Permission test with file content
 ![Permission test with file content](../screenshots/permission-test-content.png)
+
+## 3. Windows System Performance Monitoring
+
+### Objective
+Monitor CPU utilisation, memory usage, disk capacity,
+and running processes using Windows Task Manager
+and PowerShell.
+
+### Environment
+- Virtual machine: VirtualBox (WIN-LAB01)
+- Operating system: Windows 11
+- Tools: Task Manager and Windows PowerShell
+
+### Procedure
+1. Opened Task Manager and selected the Performance tab.
+2. Observed CPU utilisation and processor information.
+3. Reviewed memory usage and available memory.
+4. Inspected disk activity using Task Manager.
+5. Retrieved volume capacity and remaining space using
+   the Get-Volume command.
+6. Listed running processes sorted by accumulated CPU time.
+7. Retrieved operating system memory information using
+   Get-CimInstance.
+
+### Commands Used
+
+```powershell
+Get-Volume |
+    Select-Object DriveLetter, FileSystemLabel, SizeRemaining, Size
+
+Get-Process |
+    Sort-Object CPU -Descending |
+    Select-Object -First 10 Name, CPU, Id
+```
+
+### Result
+CPU utilisation, memory usage, disk capacity, and
+running processes were inspected using Task Manager
+and PowerShell. Volume information and memory statistics
+were retrieved using PowerShell commands.
+
+### Observations
+- CPU utilisation: 79% with 168 processes
+- Total memory: 5.2 GB
+- Free memory: 1.6 GB
+- Disk capacity: 80GB
+- Processes observed: svchost, system, Tiworker
+
+### Analysis
+The monitoring tools provided information about system
+resource usage and running processes. CPU utilisation
+represents current processor activity, while the CPU
+values returned by Get-Process represent accumulated
+processor time. Memory and disk information help identify
+resource constraints that may affect system performance.
+
+
+
+### Conclusion
+This exercise demonstrated how to monitor Windows
+system performance using Task Manager and PowerShell.
+I practised inspecting CPU utilisation, memory usage,
+disk capacity, and running processes. These skills are
+useful for identifying resource constraints and
+investigating performance-related issues.
+
+### Screenshots
+1. Windows CPU monitoring
+![windows cpu monitoring](../screenshots/windows-cpu-monitoring.png)
+2. Windows memory monitoring
+![windows memory monitoring](../screenshots/windows-memory-monitoring.png)
+3. Windows disk monitoring
+![windows disk monitoring](../screenshots/windows-disk-monitor.png)
+4. Windows process monitoring
+![window process monitoring](../screenshots/windows-process-monitoring.png)
