@@ -204,3 +204,75 @@ investigating performance-related issues.
 ![windows disk monitoring](../screenshots/windows-disk-monitor.png)
 4. Windows process monitoring
 ![window process monitoring](../screenshots/windows-process-monitoring.png)
+
+## 4. Windows Service Management and Troubleshooting
+
+### Objective
+Practise checking, stopping, starting, and investigating
+a Windows service using PowerShell.
+
+### Environment
+- Virtual machine: VirtualLab (WIN-LAB01)
+- Operating system: Windows 11
+- Service: Print Spooler
+- Service name: Spooler
+- Tool: Windows PowerShell
+
+### Procedure
+1. Opened PowerShell with administrator privileges.
+2. Checked the initial state of the Print Spooler service.
+3. Stopped the service using Stop-Service.
+4. Verified the stopped state using Get-Service.
+5. Started the service using Start-Service.
+6. Verified that the service returned to the Running state.
+7. Retrieved service configuration information.
+8. Reviewed recent Service Control Manager events.
+
+### Commands Used
+
+```powershell
+Get-Service -Name Spooler
+
+Stop-Service -Name Spooler
+
+Get-Service -Name Spooler
+
+Start-Service -Name Spooler
+
+Get-Service -Name Spooler
+
+Get-CimInstance Win32_Service -Filter "Name='Spooler'" |
+    Select-Object Name, DisplayName, State, StartMode, StartName
+```
+
+### Result
+The Print Spooler service was inspected, stopped, and
+started using PowerShell. Its state was checked before
+and after the operation. Service configuration information
+and recent Service Control Manager events were also reviewed.
+
+### Analysis
+Windows services perform background operating system
+and application tasks. Checking a service's state helps
+determine whether it is running as expected. Restarting
+a stopped service can restore functionality, while event
+logs can provide additional information when a service
+fails to start or behaves unexpectedly.
+
+### Conclusion
+This exercise demonstrated how to manage a Windows
+service using PowerShell and verify its operational
+state. I practised stopping and restarting the Print
+Spooler service and reviewing service configuration
+and event information. These skills are useful when
+troubleshooting background services on Windows systems.
+
+### Screenshots
+1. Windows service before
+![windows service before](../screenshots/windows-service-before.png)
+2. Windows service stopped
+![windows service stopped](../screenshots/windows-service-stopped.png)
+3. Windows service running
+![windows service running](../screenshots/windows-service-running.png)
+4. Windows service investigation
+![windows service investigation](../screenshots/windows-service-investigation.png)
